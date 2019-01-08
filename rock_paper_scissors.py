@@ -24,6 +24,9 @@ while True :
             print('Again!')
             choice = randint(1, 3)
             player = input('rock(r), paper(p) or scrissors(s)? ')
+        else:
+            print("Wrong choice!")
+            break
     if choice == 2:
         print('___')
         if player == 'p':
@@ -36,6 +39,9 @@ while True :
         elif player == 'r':
             print('Computer wins!')
             break
+        else:
+            print("Wrong choice!")
+            break;
     if choice == 3:
         print('>8')
         if player == 'p':
@@ -48,3 +54,6 @@ while True :
         elif player == 'r':
             print('Player wins!')
             break
+        else:
+            print("Wrong choice!")
+            break;
