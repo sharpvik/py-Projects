@@ -1,59 +1,54 @@
-from random import randint #this is a commend so the computer can choose a random number
-print('rock = O')
-print('paper = ___')
-print('scrissors = >8')
-print(' ')
-player = input('rock(r), paper(p) or scrissors(s)? ')
-if player == 'r':
-    print('O vs ', end='')
-elif player == 'p':
-    print('___ vs ', end='')
-elif player == 's':
-    print('>8 vs ', end='' )
-choice = randint(1,3)
-while True :
-    if choice == 1:
-        print('O')
-        if player == 'p':
-            print('Player wins!')
-            break
-        elif player == 's':
-            print('Computer wins!')
-            break
-        elif player == 'r':
-            print('Again!')
-            choice = randint(1, 3)
-            player = input('rock(r), paper(p) or scrissors(s)? ')
-        else:
-            print("Wrong choice!")
-            break
-    if choice == 2:
-        print('___')
-        if player == 'p':
-            print('Again!')
-            player = input('rock(r), paper(p) or scrissors(s)? ')
-            choice = randint(1, 3)
-        elif player == 's':
-            print('Player wins!')
-            break
-        elif player == 'r':
-            print('Computer wins!')
-            break
-        else:
-            print("Wrong choice!")
-            break;
-    if choice == 3:
-        print('>8')
-        if player == 'p':
-            print('Computer wins')
-            break
-        elif player == 's':
-            print('Again!')
-            player = input('rock(r), paper(p) or scrissors(s)? ')
-            choice = randint(1, 3)
-        elif player == 'r':
-            print('Player wins!')
-            break
-        else:
-            print("Wrong choice!")
-            break;
+import random
+
+ROCK = 'r'
+PAPER = 'p'
+SCISSORS = 's'
+OPTIONS = (ROCK, PAPER, SCISSORS)
+
+# who bets who
+RULES = {
+    ROCK: SCISSORS,
+    PAPER: ROCK,
+    SCISSORS: PAPER,
+}
+
+# traceback from first letter to whole word
+TRACE = {
+    ROCK: 'rock',
+    PAPER: 'paper',
+    SCISSORS: 'scissors',
+}
+
+
+def who_wins(usr, cpu):
+    print(f'\nUser chose: {TRACE[usr]}\nComputer chose: {TRACE[cpu]}')
+
+    if usr == cpu:
+        return 'It is a tie.'
+
+    if RULES[usr] == cpu:
+        return 'Human wins!'
+
+    return 'Computer wins!'
+
+
+def play():
+    # get user to choose something appropriate
+    usr = None
+    while not usr:
+        choice = input('Rock(r), Paper(p) or Scrissors(s)? ').strip()[0].lower()
+        usr = choice if choice in OPTIONS else None
+
+    # cpu to choose
+    cpu = random.choice(OPTIONS)
+
+    print( who_wins(usr, cpu) + '\n' )
+
+
+if __name__ == '__main__':
+    try:
+        while True:
+            play()
+
+    except KeyboardInterrupt:
+        print('\nThanks for playing with me!')
